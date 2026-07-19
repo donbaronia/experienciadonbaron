@@ -3,15 +3,24 @@ import { cn } from "@/lib/utils";
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   elevated?: boolean;
+  glass?: boolean;
 }
 
-export function Card({ className, elevated = false, ...props }: CardProps) {
+export function Card({
+  className,
+  elevated = false,
+  glass = false,
+  ...props
+}: CardProps) {
   return (
     <div
       className={cn(
-        "border border-ash-line bg-noir-soft/80 p-6 backdrop-blur-sm transition-colors duration-300",
+        "p-6 transition-all duration-500 ease-crown",
+        glass
+          ? "glass"
+          : "border border-ash-line bg-noir-soft/80 backdrop-blur-sm",
         elevated && "bg-noir-raised shadow-glow",
-        "hover:border-gold/30",
+        "hover:-translate-y-0.5 hover:border-gold/30 hover:shadow-elevation-2",
         className
       )}
       {...props}

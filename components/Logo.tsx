@@ -3,9 +3,14 @@ import { cn } from "@/lib/utils";
 interface LogoProps {
   className?: string;
   withWordmark?: boolean;
+  drawOnMount?: boolean;
 }
 
-export function Logo({ className, withWordmark = true }: LogoProps) {
+export function Logo({
+  className,
+  withWordmark = true,
+  drawOnMount = false,
+}: LogoProps) {
   return (
     <span className={cn("inline-flex items-center gap-3", className)}>
       <svg
@@ -15,16 +20,23 @@ export function Logo({ className, withWordmark = true }: LogoProps) {
         fill="none"
       >
         <path
-          d="M8 34 L11 16 L18 25 L24 12 L30 25 L37 16 L40 34 Z"
+          d="M9 33 L12 17 L18.5 25 L24 13 L29.5 25 L36 17 L39 33 Z"
           stroke="#C6A15B"
-          strokeWidth="2"
+          strokeWidth="1.5"
           strokeLinejoin="round"
-          fill="rgba(198,161,91,0.08)"
+          fill="rgba(198,161,91,0.06)"
+          strokeDasharray={drawOnMount ? 200 : undefined}
+          className={drawOnMount ? "animate-crown-draw" : undefined}
         />
-        <path d="M8 38 H40" stroke="#C6A15B" strokeWidth="2" />
-        <circle cx="24" cy="12" r="1.8" fill="#E3C88F" />
-        <circle cx="11" cy="16" r="1.5" fill="#E3C88F" />
-        <circle cx="37" cy="16" r="1.5" fill="#E3C88F" />
+        <path
+          d="M11 37.5 H37"
+          stroke="#C6A15B"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+        <circle cx="24" cy="12" r="1.6" fill="#E3C88F" />
+        <circle cx="12" cy="16.5" r="1.2" fill="#E3C88F" />
+        <circle cx="36" cy="16.5" r="1.2" fill="#E3C88F" />
       </svg>
       {withWordmark ? (
         <span className="flex flex-col leading-none">

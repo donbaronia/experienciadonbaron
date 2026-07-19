@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import type { ReactNode } from "react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { IntroReveal } from "@/components/IntroReveal";
 import { BRAND } from "@/lib/constants";
 import "@/styles/globals.css";
 
@@ -31,14 +33,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR" className={`${display.variable} ${body.variable}`}>
       <body className="min-h-screen font-body">
+        <IntroReveal />
         <AnimatedBackground />
         <Header />
         {children}
-        <footer className="relative z-10 border-t border-ash-line/60 py-10 text-center">
-          <p className="text-[0.65rem] uppercase tracking-crown text-ash">
-            {BRAND.name} · {BRAND.city}
-          </p>
-        </footer>
+        <Footer />
       </body>
     </html>
   );
