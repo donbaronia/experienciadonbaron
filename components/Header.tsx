@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/Logo";
-import { NAV_LINKS } from "@/lib/constants";
+import { NAV_LINKS } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -38,7 +38,7 @@ export function Header() {
       <div className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-6 md:px-10">
         <Link
           href="/"
-          aria-label="Universo Don Baron — início"
+          aria-label="Universo Don Baron — lobby"
           className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
         >
           <Logo />

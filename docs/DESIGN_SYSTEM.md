@@ -87,8 +87,13 @@ Usado no Header ao rolar, menu móvel e superfícies flutuantes. Nunca em áreas
 | `AnimatedBackground` | Aura dourada, brasas subindo, grão e vinheta |
 | `IntroReveal` | Animação de entrada (1x por sessão): coroa se desenha, wordmark expande |
 | `Reveal` | Entrada on-scroll |
+| `ComingSoon` | Tela "em construção" dos módulos stub — reaproveita `Card` + ícone Lucide |
 
-## 8. Movimento
+## 8. shadcn/ui
+
+O projeto adota **Zod + React Hook Form** para formulários e reserva `components/ui/` para primitivos shadcn/ui — mas a instalação é **manual**, componente a componente, copiando o código-fonte da [documentação oficial](https://ui.shadcn.com) e adaptando à paleta acima. O CLI (`npx shadcn init`) não é usado: sua versão atual assume Tailwind v4 (CSS-first, `@theme`), enquanto este projeto está em Tailwind v3.4.17 com config JS — rodar o init sobrescreve `styles/globals.css` e `lib/utils.ts` com um tema claro/cinza incompatível e quebra o build. Ao copiar um componente manualmente: usar `cn()` de `lib/utils.ts` (já compatível), mapear `bg-primary`/`bg-background`/etc. para os tokens desta tabela (nunca inserir as variáveis OKLCH padrão do shadcn) e manter `class-variance-authority` (já instalado) para variantes.
+
+## 9. Movimento
 
 - Curvas: `ease-crown` `cubic-bezier(0.22,1,0.36,1)` para entradas; `ease-silk` `cubic-bezier(0.65,0,0.35,1)` para varreduras.
 - Durações: 300ms (micro) · 600ms (padrão) · 900ms (cerimonial).
@@ -96,6 +101,6 @@ Usado no Header ao rolar, menu móvel e superfícies flutuantes. Nunca em áreas
 - Ambiente lento: aura 10–13s, brasas 16–26s.
 - `prefers-reduced-motion` desliga intro, brasas, transições e parallax em todos os componentes.
 
-## 9. Voz
+## 10. Voz
 
 Curta, confiante, em pt-BR. Nunca vende — convida. "Entrar no Vault", não "Confira nossas promoções".

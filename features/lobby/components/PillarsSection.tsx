@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Card, CardLabel, CardTitle } from "@/components/Card";
 import { Reveal } from "@/components/Reveal";
-import { getExperiencePillars } from "../services/home.service";
+import { getExperiencePillars } from "../services/lobby.service";
 
 export async function PillarsSection() {
   const { data: pillars } = await getExperiencePillars();

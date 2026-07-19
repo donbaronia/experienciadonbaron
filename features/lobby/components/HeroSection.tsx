@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
-import { BRAND } from "@/lib/constants";
+import { BRAND } from "@/config/brand";
 
 export function HeroSection() {
   return (

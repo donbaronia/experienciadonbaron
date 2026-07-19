@@ -1,0 +1,15 @@
+export const NAV_LINKS = [
+  { href: "/", label: "Lobby" },
+  { href: "/vault", label: "Vault" },
+  { href: "/menu-reservado", label: "Menu Reservado" },
+  { href: "/beneficios", label: "Benefícios" },
+  { href: "/eventos", label: "Eventos" },
+  { href: "/conquistas", label: "Conquistas" },
+  { href: "/colecoes", label: "Coleções" },
+  { href: "/pedidos", label: "Pedidos" },
+  { href: "/historico", label: "Histórico" },
+  { href: "/nfc", label: "Cartão" },
+  { href: "/fundador", label: "Fundador" },
+  { href: "/perfil", label: "Perfil" },
+  { href: "/configuracoes", label: "Configurações" },
+] as const;

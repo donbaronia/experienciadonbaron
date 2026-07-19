@@ -9,7 +9,10 @@ Plataforma de experiência premium do Don Baron. Não é um site de hamburgueria
 - Tailwind CSS
 - Framer Motion
 - Lucide React
+- Zod + React Hook Form (prontos para o primeiro formulário real)
+- shadcn/ui (adoção manual, componente a componente — ver `docs/DESIGN_SYSTEM.md`)
 - Supabase (estrutura preparada, sem autenticação implementada)
+- Prettier (`prettier-plugin-tailwindcss`)
 
 ## Como rodar
 
@@ -32,7 +35,7 @@ Acesse `http://localhost:3000`.
 
 ## Supabase
 
-O projeto já possui clients prontos em `lib/supabase` (browser e server, via `@supabase/ssr`). Para conectar:
+O projeto já possui clients prontos em `services/supabase` (browser e server, via `@supabase/ssr`). Para conectar:
 
 1. Copie `.env.example` para `.env.local`
 2. Preencha `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY`
@@ -41,6 +44,9 @@ Enquanto o Supabase não está conectado, os services das features servem dados 
 
 ## Documentação
 
+- [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) — auditoria do estado atual do projeto
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — arquitetura e convenções
-- [`docs/DESIGN-SYSTEM.md`](docs/DESIGN-SYSTEM.md) — tema, tipografia e componentes
-- [`docs/SUPABASE.md`](docs/SUPABASE.md) — plano de integração e modelagem sugerida
+- [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md) — tema, tipografia e componentes
+- [`docs/DATABASE.md`](docs/DATABASE.md) — plano de integração Supabase e modelagem sugerida
+- [`docs/ROADMAP.md`](docs/ROADMAP.md) — fases futuras do produto
+- [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md) — como rodar e convenções de contribuição
