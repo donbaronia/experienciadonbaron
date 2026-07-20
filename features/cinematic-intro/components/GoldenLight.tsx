@@ -61,14 +61,14 @@ export function GoldenLight({ phase }: GoldenLightProps) {
         angle={0.5}
         penumbra={0.6}
         intensity={0}
-        color="#E3C88F"
+        color="#F6D777"
         castShadow
       />
       <pointLight
         ref={rimLight}
         position={[-4, -1, -3]}
         intensity={0}
-        color="#C6A15B"
+        color="#D4AF37"
       />
       <Environment preset="studio" environmentIntensity={0.6} />
     </>

@@ -37,7 +37,7 @@ export function AnimatedBackground() {
         className="absolute left-1/2 top-[-20%] h-[60vh] w-[70vw] -translate-x-1/2 rounded-full"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(198,161,91,0.12) 0%, rgba(198,161,91,0.03) 45%, transparent 70%)",
+            "radial-gradient(ellipse at center, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.03) 45%, transparent 70%)",
         }}
         animate={
           reduceMotion
@@ -50,7 +50,7 @@ export function AnimatedBackground() {
         className="absolute bottom-[-30%] right-[-10%] h-[50vh] w-[40vw] rounded-full"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(198,161,91,0.06) 0%, transparent 65%)",
+            "radial-gradient(ellipse at center, rgba(212,175,55,0.06) 0%, transparent 65%)",
         }}
         animate={reduceMotion ? undefined : { opacity: [0.4, 0.75, 0.4] }}
         transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}

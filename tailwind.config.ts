@@ -10,13 +10,13 @@ const config: Config = {
     extend: {
       colors: {
         noir: {
-          DEFAULT: "#0A0A09",
-          soft: "#111110",
-          raised: "#171715",
+          DEFAULT: "#050505",
+          soft: "#141414",
+          raised: "#1B1B1B",
         },
         gold: {
-          DEFAULT: "#C6A15B",
-          light: "#E3C88F",
+          DEFAULT: "#D4AF37",
+          light: "#F6D777",
           dark: "#8C6D33",
           muted: "#5C4B28",
         },
@@ -51,18 +51,18 @@ const config: Config = {
       },
       backgroundImage: {
         "gold-sheen":
-          "linear-gradient(105deg, #8C6D33 0%, #C6A15B 40%, #E3C88F 50%, #C6A15B 60%, #8C6D33 100%)",
+          "linear-gradient(105deg, #8C6D33 0%, #D4AF37 40%, #F6D777 50%, #D4AF37 60%, #8C6D33 100%)",
         "noir-depth":
-          "radial-gradient(ellipse at 50% 0%, #171715 0%, #0A0A09 65%)",
+          "radial-gradient(ellipse at 50% 0%, #1B1B1B 0%, #050505 65%)",
         "gold-fade":
-          "linear-gradient(90deg, transparent 0%, rgba(198,161,91,0.4) 50%, transparent 100%)",
+          "linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.4) 50%, transparent 100%)",
       },
       boxShadow: {
         "elevation-1": "0 2px 8px rgba(0,0,0,0.35)",
         "elevation-2": "0 8px 24px rgba(0,0,0,0.45)",
         "elevation-3": "0 20px 48px rgba(0,0,0,0.55)",
-        glow: "0 0 24px rgba(198, 161, 91, 0.22)",
-        "glow-strong": "0 0 48px rgba(198, 161, 91, 0.38)",
+        glow: "0 0 24px rgba(212, 175, 55, 0.22)",
+        "glow-strong": "0 0 48px rgba(212, 175, 55, 0.38)",
         "glow-edge": "inset 0 1px 0 rgba(244,241,232,0.06)",
       },
       animation: {

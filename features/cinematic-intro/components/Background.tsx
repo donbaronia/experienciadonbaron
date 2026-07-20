@@ -24,9 +24,9 @@ function createGlowTexture(): THREE.CanvasTexture {
       size / 2,
       size / 2
     );
-    gradient.addColorStop(0, "rgba(227,200,143,0.9)");
-    gradient.addColorStop(0.4, "rgba(198,161,91,0.35)");
-    gradient.addColorStop(1, "rgba(198,161,91,0)");
+    gradient.addColorStop(0, "rgba(246,215,119,0.9)");
+    gradient.addColorStop(0.4, "rgba(212,175,55,0.35)");
+    gradient.addColorStop(1, "rgba(212,175,55,0)");
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, size, size);
   }

@@ -4,11 +4,11 @@
 
 :root {
   /* ── Cor ───────────────────────────── */
-  --noir: #0a0a09;
-  --noir-soft: #111110;
-  --noir-raised: #171715;
-  --gold: #c6a15b;
-  --gold-light: #e3c88f;
+  --noir: #050505;
+  --noir-soft: #141414;
+  --noir-raised: #1b1b1b;
+  --gold: #d4af37;
+  --gold-light: #f6d777;
   --gold-dark: #8c6d33;
   --ivory: #f4f1e8;
   --ivory-dim: #c9c5b8;
@@ -27,8 +27,8 @@
   --duration-slow: 900ms;
 
   /* ── Vidro ─────────────────────────── */
-  --glass-bg: rgba(17, 17, 16, 0.55);
-  --glass-border: rgba(198, 161, 91, 0.14);
+  --glass-bg: rgba(20, 20, 20, 0.55);
+  --glass-border: rgba(212, 175, 55, 0.14);
   --glass-highlight: rgba(244, 241, 232, 0.06);
 }
 
@@ -44,7 +44,7 @@ body {
 }
 
 ::selection {
-  background-color: rgba(198, 161, 91, 0.3);
+  background-color: rgba(212, 175, 55, 0.3);
   color: var(--ivory);
 }
 
@@ -70,9 +70,9 @@ body {
   background-image: linear-gradient(
     105deg,
     #8c6d33 0%,
-    #c6a15b 35%,
-    #e3c88f 50%,
-    #c6a15b 65%,
+    #d4af37 35%,
+    #f6d777 50%,
+    #d4af37 65%,
     #8c6d33 100%
   );
   background-size: 200% auto;
@@ -106,7 +106,7 @@ body {
   background: linear-gradient(
       120deg,
       transparent 30%,
-      rgba(227, 200, 143, 0.5) 50%,
+      rgba(246, 215, 119, 0.5) 50%,
       transparent 70%
     )
     border-box;

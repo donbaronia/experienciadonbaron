@@ -26,6 +26,8 @@ export function Header() {
     setMenuOpen(false);
   }, [pathname]);
 
+  if (pathname === "/") return null;
+
   return (
     <header
       className={cn(

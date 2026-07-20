@@ -10,18 +10,20 @@ Regra de ouro: se um elemento não carrega significado, ele sai.
 
 | Token | Hex | Uso |
 | --- | --- | --- |
-| `noir` | `#0A0A09` | Fundo base |
-| `noir-soft` | `#111110` | Superfícies |
-| `noir-raised` | `#171715` | Superfícies elevadas |
-| `gold` | `#C6A15B` | Acento principal (metal) |
-| `gold-light` | `#E3C88F` | Reflexo / hover |
+| `noir` | `#050505` | Fundo base |
+| `noir-soft` | `#141414` | Superfícies |
+| `noir-raised` | `#1B1B1B` | Superfícies elevadas |
+| `gold` | `#D4AF37` | Acento principal (metal) |
+| `gold-light` | `#F6D777` | Reflexo / hover |
 | `gold-dark` | `#8C6D33` | Sombra do metal |
 | `ivory` | `#F4F1E8` | Texto principal |
 | `ivory-dim` | `#C9C5B8` | Texto secundário |
 | `ash` | `#8A8578` | Labels / terciário |
 | `ash-line` | `#25241F` | Bordas hairline |
 
-Proibido: cores saturadas, neon, gradientes coloridos, branco puro `#FFF`.
+Paleta revisada no Sprint 010 (`noir`/`gold` receberam valores novos — mesmos nomes de token, então nenhum componente precisou ser tocado). Proibido: cores saturadas, neon, gradientes coloridos, branco puro `#FFF`.
+
+**Nota sobre "branco":** o spec do Sprint 010 pede texto branco. Mantivemos `ivory` (`#F4F1E8`, off-white) em vez de `#FFFFFF` puro — branco puro sobre um fundo quase preto (`#050505`) cria um contraste duro que quebra a leitura "luxo discreto" do resto deste documento. `ivory` já cumpre o papel de "branco" pretendido pelo spec sem essa aspereza.
 
 ## 2. Tipografia
 

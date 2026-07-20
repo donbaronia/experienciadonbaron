@@ -113,7 +113,7 @@ export function Particles({ phase }: ParticlesProps) {
         ref={materialRef}
         size={0.035}
         sizeAttenuation
-        color="#E3C88F"
+        color="#F6D777"
         transparent
         opacity={0}
         depthWrite={false}

@@ -22,7 +22,7 @@ export function MemberCardVisual({ serialNumber }: MemberCardVisualProps) {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 20% 0%, rgba(198,161,91,0.15) 0%, transparent 55%)",
+            "radial-gradient(ellipse at 20% 0%, rgba(212,175,55,0.15) 0%, transparent 55%)",
         }}
       />
       <div className="relative flex h-full flex-col justify-between">
