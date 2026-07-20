@@ -9,7 +9,7 @@ interface ParticlesProps {
   phase: IntroPhase;
 }
 
-const COUNT = 4000;
+const COUNT = 1200;
 const DRAG = 0.55;
 const ACTIVE_PHASES: readonly IntroPhase[] = ["explode", "menu", "fade"];
 const LIT_PHASES: readonly IntroPhase[] = ["explode", "menu"];
@@ -94,7 +94,7 @@ export function Particles({ phase }: ParticlesProps) {
     }
 
     if (materialRef.current) {
-      const targetOpacity = LIT_PHASES.includes(phase) ? 0.9 : 0;
+      const targetOpacity = LIT_PHASES.includes(phase) ? 0.5 : 0;
       const damping = 1 - Math.exp(-delta * (phase === "fade" ? 1.2 : 4));
       materialRef.current.opacity = THREE.MathUtils.lerp(
         materialRef.current.opacity,
@@ -111,7 +111,7 @@ export function Particles({ phase }: ParticlesProps) {
       </bufferGeometry>
       <pointsMaterial
         ref={materialRef}
-        size={0.035}
+        size={0.025}
         sizeAttenuation
         color="#F6D777"
         transparent

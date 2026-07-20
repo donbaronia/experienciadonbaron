@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { GlowButton } from "@/components/GlowButton";
 import { ENTRY_MENU_OPTIONS } from "../types";
 
 interface EntryMenuProps {
@@ -10,38 +9,45 @@ interface EntryMenuProps {
   onEnter: () => void;
 }
 
-export function EntryMenu({ visible, onEnter }: EntryMenuProps) {
-  const secondaryOptions = ENTRY_MENU_OPTIONS.filter(
-    (option) => option.id !== "enter"
-  );
+const LINK_CLASS =
+  "text-xs uppercase tracking-wide2 transition-colors duration-300 focus-visible:outline-none";
 
+export function EntryMenu({ visible, onEnter }: EntryMenuProps) {
   return (
     <AnimatePresence>
       {visible ? (
         <motion.div
           key="entry-menu"
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -12 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="pointer-events-none absolute inset-x-0 bottom-[12%] z-10 flex flex-col items-center gap-8"
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="pointer-events-none absolute inset-x-0 bottom-[14%] z-10 flex flex-col items-center gap-7"
         >
-          <p className="text-[0.6rem] uppercase tracking-crown text-gold">
+          <p className="text-[0.6rem] uppercase tracking-crown text-ash">
             Universo Don Baron
           </p>
           <div className="pointer-events-auto flex flex-col items-center gap-6 sm:flex-row sm:gap-10">
-            <GlowButton variant="filled" onClick={onEnter}>
-              Entrar
-            </GlowButton>
-            {secondaryOptions.map((option) => (
-              <Link
-                key={option.id}
-                href={option.href}
-                className="text-xs uppercase tracking-wide2 text-ivory-dim transition-colors duration-300 hover:text-gold focus-visible:text-gold focus-visible:outline-none"
-              >
-                {option.label}
-              </Link>
-            ))}
+            {ENTRY_MENU_OPTIONS.map((option) =>
+              option.id === "enter" ? (
+                <button
+                  key={option.id}
+                  type="button"
+                  onClick={onEnter}
+                  className={`${LINK_CLASS} text-ivory hover:text-gold focus-visible:text-gold`}
+                >
+                  {option.label}
+                </button>
+              ) : (
+                <Link
+                  key={option.id}
+                  href={option.href}
+                  className={`${LINK_CLASS} text-ivory-dim hover:text-gold focus-visible:text-gold`}
+                >
+                  {option.label}
+                </Link>
+              )
+            )}
           </div>
         </motion.div>
       ) : null}

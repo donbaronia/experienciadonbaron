@@ -12,7 +12,7 @@ interface Coin3DProps {
   radius?: number;
 }
 
-const DEFAULT_RADIUS = 1.1;
+const DEFAULT_RADIUS = 0.45;
 const COIN_HEIGHT = 0.16;
 const TEETH = 72;
 
@@ -45,7 +45,7 @@ function createCoinBodyGeometry(radius: number): THREE.ExtrudeGeometry {
   return geometry;
 }
 
-/** Monograma "D"+"B" sólido (mesma técnica comprovada da coroa do Sprint 002: Shape à mão, sem holes). */
+/** Monograma "D"+"B" sólido (Shape à mão, sem holes — geometria estável). */
 function createMonogramShapes(): THREE.Shape[] {
   const d = new THREE.Shape();
   d.moveTo(22, 32);
@@ -94,44 +94,6 @@ function createCrestReliefGeometries(radius: number): THREE.ExtrudeGeometry[] {
   });
 }
 
-function createHaloTexture(): THREE.CanvasTexture {
-  const size = 256;
-  const canvas = document.createElement("canvas");
-  canvas.width = size;
-  canvas.height = size;
-  const ctx = canvas.getContext("2d");
-  if (ctx) {
-    const gradient = ctx.createRadialGradient(
-      size / 2,
-      size / 2,
-      0,
-      size / 2,
-      size / 2,
-      size / 2
-    );
-    gradient.addColorStop(0, "rgba(246,215,119,0.55)");
-    gradient.addColorStop(0.5, "rgba(212,175,55,0.18)");
-    gradient.addColorStop(1, "rgba(212,175,55,0)");
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, size, size);
-  }
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.needsUpdate = true;
-  return texture;
-}
-
-function createSparklePositions(radius: number, count: number): Float32Array {
-  const positions = new Float32Array(count * 3);
-  for (let i = 0; i < count; i += 1) {
-    const angle = (i / count) * Math.PI * 2 + Math.sin(i) * 0.3;
-    const orbit = radius * (1.5 + Math.random() * 0.6);
-    positions[i * 3] = Math.cos(angle) * orbit;
-    positions[i * 3 + 1] = Math.sin(angle) * orbit * 0.6;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * radius * 0.8;
-  }
-  return positions;
-}
-
 const VISIBLE_PHASES: readonly IntroPhase[] = [
   "coinAppear",
   "coinRotate",
@@ -140,22 +102,29 @@ const VISIBLE_PHASES: readonly IntroPhase[] = [
 ];
 
 const SPIN_SPEED: Partial<Record<IntroPhase, number>> = {
-  coinAppear: 0.6,
-  coinRotate: 4.2,
-  cameraApproach: 1.1,
+  coinAppear: 0.3,
+  coinRotate: 0.9,
+  cameraApproach: 0.4,
 };
 
-const LANDED_BASE_SPIN = 0.22;
-const LANDED_SPIN_BURST = 16;
+const OSCILLATION_AMPLITUDE = 0.12;
+const OSCILLATION_SPEED = 0.15;
+const SPIN_TWEEN_DURATION = 1.4;
+
+function easeOutCubic(t: number): number {
+  return 1 - (1 - t) ** 3;
+}
 
 export function Coin3D({ phase = "void", mode = "intro", radius }: Coin3DProps) {
   const coinRadius = radius ?? DEFAULT_RADIUS;
   const groupRef = useRef<THREE.Group>(null);
-  const haloRef = useRef<THREE.Sprite>(null);
   const rotationRef = useRef(0);
+  const baseRotationRef = useRef(0);
+  const spinTweenRef = useRef<{ startTime: number; from: number; to: number } | null>(
+    null
+  );
   const tiltXRef = useRef(0);
   const tiltZRef = useRef(0);
-  const spinSpeedRef = useRef(LANDED_BASE_SPIN);
   const settleTargetRef = useRef<number | null>(null);
   const elapsed = useRef(0);
 
@@ -167,11 +136,6 @@ export function Coin3D({ phase = "void", mode = "intro", radius }: Coin3DProps) 
     () => createCrestReliefGeometries(coinRadius),
     [coinRadius]
   );
-  const haloTexture = useMemo(() => createHaloTexture(), []);
-  const sparklePositions = useMemo(
-    () => createSparklePositions(coinRadius, 36),
-    [coinRadius]
-  );
 
   useFrame((state, delta) => {
     const group = groupRef.current;
@@ -179,17 +143,22 @@ export function Coin3D({ phase = "void", mode = "intro", radius }: Coin3DProps) 
     elapsed.current += delta;
 
     if (mode === "landed") {
-      spinSpeedRef.current = THREE.MathUtils.damp(
-        spinSpeedRef.current,
-        LANDED_BASE_SPIN,
-        1.4,
-        delta
-      );
-      rotationRef.current += spinSpeedRef.current * delta;
-      group.rotation.y = rotationRef.current;
+      if (spinTweenRef.current) {
+        const { startTime, from, to } = spinTweenRef.current;
+        const t = Math.min(
+          (elapsed.current - startTime) / SPIN_TWEEN_DURATION,
+          1
+        );
+        baseRotationRef.current = from + (to - from) * easeOutCubic(t);
+        if (t >= 1) spinTweenRef.current = null;
+      }
 
-      const targetTiltX = state.pointer.y * 0.14;
-      const targetTiltZ = -state.pointer.x * 0.14;
+      const oscillation =
+        Math.sin(elapsed.current * OSCILLATION_SPEED) * OSCILLATION_AMPLITUDE;
+      group.rotation.y = baseRotationRef.current + oscillation;
+
+      const targetTiltX = state.pointer.y * 0.08;
+      const targetTiltZ = -state.pointer.x * 0.08;
       tiltXRef.current = THREE.MathUtils.damp(
         tiltXRef.current,
         targetTiltX,
@@ -204,7 +173,7 @@ export function Coin3D({ phase = "void", mode = "intro", radius }: Coin3DProps) 
       );
       group.rotation.x = tiltXRef.current;
       group.rotation.z = tiltZRef.current;
-      group.position.y = Math.sin(elapsed.current * 0.6) * coinRadius * 0.05;
+      group.position.y = Math.sin(elapsed.current * 0.4) * coinRadius * 0.04;
 
       const nextScale = THREE.MathUtils.damp(group.scale.x, 1, 3, delta);
       group.scale.setScalar(nextScale);
@@ -224,7 +193,7 @@ export function Coin3D({ phase = "void", mode = "intro", radius }: Coin3DProps) 
         rotationRef.current = THREE.MathUtils.damp(
           rotationRef.current,
           settleTargetRef.current,
-          4,
+          3,
           delta
         );
       } else {
@@ -242,10 +211,6 @@ export function Coin3D({ phase = "void", mode = "intro", radius }: Coin3DProps) 
       );
       group.scale.setScalar(nextScale);
     }
-
-    if (haloRef.current) {
-      haloRef.current.rotation.z = elapsed.current * 0.05;
-    }
   });
 
   return (
@@ -255,42 +220,21 @@ export function Coin3D({ phase = "void", mode = "intro", radius }: Coin3DProps) 
       onClick={
         mode === "landed"
           ? () => {
-              spinSpeedRef.current += LANDED_SPIN_BURST;
+              if (spinTweenRef.current) return;
+              const currentOscillation =
+                Math.sin(elapsed.current * OSCILLATION_SPEED) *
+                OSCILLATION_AMPLITUDE;
+              const currentRotation =
+                baseRotationRef.current + currentOscillation;
+              spinTweenRef.current = {
+                startTime: elapsed.current,
+                from: currentRotation,
+                to: currentRotation + Math.PI * 2,
+              };
             }
           : undefined
       }
     >
-      <sprite
-        ref={haloRef}
-        scale={[coinRadius * 4.2, coinRadius * 4.2, 1]}
-        position={[0, 0, -coinRadius * 0.3]}
-      >
-        <spriteMaterial
-          map={haloTexture}
-          transparent
-          depthWrite={false}
-          blending={THREE.AdditiveBlending}
-        />
-      </sprite>
-
-      <points>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            args={[sparklePositions, 3]}
-          />
-        </bufferGeometry>
-        <pointsMaterial
-          size={0.02}
-          sizeAttenuation
-          color="#F6D777"
-          transparent
-          opacity={0.55}
-          depthWrite={false}
-          blending={THREE.AdditiveBlending}
-        />
-      </points>
-
       <mesh
         castShadow
         receiveShadow
@@ -311,7 +255,7 @@ export function Coin3D({ phase = "void", mode = "intro", radius }: Coin3DProps) 
             : undefined
         }
       >
-        <meshStandardMaterial color="#D4AF37" metalness={1} roughness={0.24} />
+        <meshStandardMaterial color="#9C7A34" metalness={1} roughness={0.4} />
       </mesh>
 
       {crestGeometries.map((geometry, index) => (
@@ -321,7 +265,7 @@ export function Coin3D({ phase = "void", mode = "intro", radius }: Coin3DProps) 
           position={[0, 0, COIN_HEIGHT / 2]}
           castShadow
         >
-          <meshStandardMaterial color="#F6D777" metalness={1} roughness={0.16} />
+          <meshStandardMaterial color="#C7A146" metalness={1} roughness={0.32} />
         </mesh>
       ))}
 

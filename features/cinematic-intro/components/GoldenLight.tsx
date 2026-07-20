@@ -32,21 +32,21 @@ export function GoldenLight({ phase }: GoldenLightProps) {
     if (keyLight.current) {
       keyLight.current.intensity = THREE.MathUtils.lerp(
         keyLight.current.intensity,
-        target * 3.2,
+        target * 1.6,
         damping
       );
     }
     if (rimLight.current) {
       rimLight.current.intensity = THREE.MathUtils.lerp(
         rimLight.current.intensity,
-        target * 1.6,
+        target * 0.6,
         damping
       );
     }
     if (ambient.current) {
       ambient.current.intensity = THREE.MathUtils.lerp(
         ambient.current.intensity,
-        target * 0.18,
+        target * 0.12,
         damping
       );
     }
@@ -70,7 +70,7 @@ export function GoldenLight({ phase }: GoldenLightProps) {
         intensity={0}
         color="#D4AF37"
       />
-      <Environment preset="studio" environmentIntensity={0.6} />
+      <Environment preset="studio" environmentIntensity={0.3} />
     </>
   );
 }

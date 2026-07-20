@@ -47,9 +47,9 @@ export function IntroExperience({ onComplete }: IntroExperienceProps) {
           <CameraController phase={phase} />
           <EffectComposer>
             <Bloom
-              luminanceThreshold={0.15}
+              luminanceThreshold={0.45}
               luminanceSmoothing={0.9}
-              intensity={0.9}
+              intensity={0.22}
               mipmapBlur
             />
           </EffectComposer>

@@ -8,18 +8,18 @@ export function LobbyCoinScene() {
     <Canvas
       dpr={[1, 2]}
       gl={{ antialias: true, powerPreference: "high-performance" }}
-      camera={{ fov: 32, position: [0, 0, 5.2] }}
+      camera={{ fov: 32, position: [0, 0, 2.15] }}
     >
-      <ambientLight intensity={0.5} color="#F4F1E8" />
+      <ambientLight intensity={0.3} color="#F4F1E8" />
       <spotLight
         position={[3, 4, 5]}
         angle={0.5}
         penumbra={0.6}
-        intensity={2.4}
+        intensity={1.4}
         color="#F6D777"
       />
-      <pointLight position={[-4, -1, -3]} intensity={1.1} color="#D4AF37" />
-      <Coin3D mode="landed" radius={1.1} />
+      <pointLight position={[-4, -1, -3]} intensity={0.5} color="#D4AF37" />
+      <Coin3D mode="landed" radius={0.45} />
     </Canvas>
   );
 }

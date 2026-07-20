@@ -26,13 +26,13 @@ export function LobbyCoin() {
   }, [reduceMotion]);
 
   return (
-    <div className="relative mx-auto flex h-[22vh] min-h-[160px] w-full max-w-xs items-center justify-center">
+    <div className="relative mx-auto flex h-[9vh] min-h-[70px] w-full max-w-[180px] items-center justify-center">
       {canRender3D ? (
         <Suspense fallback={null}>
           <LobbyCoinScene />
         </Suspense>
       ) : (
-        <Logo withWordmark={false} size={96} />
+        <Logo withWordmark={false} size={40} />
       )}
     </div>
   );
