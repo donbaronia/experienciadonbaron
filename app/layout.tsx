@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { IntroReveal } from "@/components/IntroReveal";
 import { BRAND } from "@/config/brand";
 import { Providers } from "@/providers/Providers";
 import { getSession } from "@/services/auth/auth.service";
@@ -42,7 +41,6 @@ export default async function RootLayout({
     <html lang="pt-BR" className={`${display.variable} ${body.variable}`}>
       <body className="min-h-screen font-body">
         <Providers session={session}>
-          <IntroReveal />
           <AnimatedBackground />
           <Header />
           {children}
