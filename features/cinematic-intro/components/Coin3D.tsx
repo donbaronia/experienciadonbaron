@@ -110,6 +110,8 @@ const SPIN_SPEED: Partial<Record<IntroPhase, number>> = {
 const OSCILLATION_AMPLITUDE = 0.12;
 const OSCILLATION_SPEED = 0.15;
 const SPIN_TWEEN_DURATION = 1.4;
+const BASE_TILT_X = -0.32;
+const BASE_YAW = 0.4;
 
 function easeOutCubic(t: number): number {
   return 1 - (1 - t) ** 3;
@@ -119,11 +121,11 @@ export function Coin3D({ phase = "void", mode = "intro", radius }: Coin3DProps) 
   const coinRadius = radius ?? DEFAULT_RADIUS;
   const groupRef = useRef<THREE.Group>(null);
   const rotationRef = useRef(0);
-  const baseRotationRef = useRef(0);
+  const baseRotationRef = useRef(mode === "landed" ? BASE_YAW : 0);
   const spinTweenRef = useRef<{ startTime: number; from: number; to: number } | null>(
     null
   );
-  const tiltXRef = useRef(0);
+  const tiltXRef = useRef(mode === "landed" ? BASE_TILT_X : 0);
   const tiltZRef = useRef(0);
   const settleTargetRef = useRef<number | null>(null);
   const elapsed = useRef(0);
@@ -157,7 +159,7 @@ export function Coin3D({ phase = "void", mode = "intro", radius }: Coin3DProps) 
         Math.sin(elapsed.current * OSCILLATION_SPEED) * OSCILLATION_AMPLITUDE;
       group.rotation.y = baseRotationRef.current + oscillation;
 
-      const targetTiltX = state.pointer.y * 0.08;
+      const targetTiltX = BASE_TILT_X + state.pointer.y * 0.08;
       const targetTiltZ = -state.pointer.x * 0.08;
       tiltXRef.current = THREE.MathUtils.damp(
         tiltXRef.current,

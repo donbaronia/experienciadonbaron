@@ -35,11 +35,20 @@ export function LobbyNav() {
                   <Link
                     href={item.href}
                     className={cn(
-                      "text-[0.65rem] uppercase tracking-wide2 transition-colors duration-300 focus-visible:outline-none",
-                      active ? "text-gold" : "text-ivory-dim hover:text-gold"
+                      "group relative inline-block pb-2 text-[0.65rem] uppercase tracking-wide2 focus-visible:outline-none",
+                      active ? "text-gold" : "text-ivory-dim"
                     )}
                   >
                     {item.label}
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-gold transition-transform duration-500 ease-crown",
+                        active
+                          ? "scale-x-100"
+                          : "scale-x-0 group-hover:scale-x-100"
+                      )}
+                    />
                   </Link>
                 </li>
               );
