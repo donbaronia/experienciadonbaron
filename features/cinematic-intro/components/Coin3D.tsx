@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * A moeda é o único elemento "vivo" da tela — por isso seu movimento
+ * precisa ser quase inteiro contido. Em repouso (modo "landed"): uma
+ * oscilação de poucos graus, lenta o bastante para nunca ser percebida
+ * como "girando" — objetos valiosos não giram sozinhos, eles apenas
+ * existem, e a luz é que se move sobre eles. O único movimento grande
+ * é o clique: uma única rotação deliberada, nunca repetida.
+ */
 import { Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
@@ -107,8 +115,8 @@ const SPIN_SPEED: Partial<Record<IntroPhase, number>> = {
   cameraApproach: 0.4,
 };
 
-const OSCILLATION_AMPLITUDE = 0.12;
-const OSCILLATION_SPEED = 0.15;
+const OSCILLATION_AMPLITUDE = 0.06;
+const OSCILLATION_SPEED = 0.1;
 const SPIN_TWEEN_DURATION = 1.4;
 const BASE_TILT_X = -0.32;
 const BASE_YAW = 0.4;

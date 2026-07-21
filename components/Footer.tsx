@@ -1,9 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import { BRAND } from "@/config/brand";
 import { NAV_LINKS } from "@/config/navigation";
 
 export function Footer() {
+  const pathname = usePathname();
+
+  if (pathname === "/") return null;
+
   return (
     <footer className="relative z-10 border-t border-ash-line/60">
       <div className="mx-auto w-full max-w-6xl px-6 py-16 md:px-10">

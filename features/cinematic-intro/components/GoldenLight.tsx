@@ -1,6 +1,6 @@
 "use client";
 
-import { Environment } from "@react-three/drei";
+import { Environment, Lightformer } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
@@ -70,7 +70,27 @@ export function GoldenLight({ phase }: GoldenLightProps) {
         intensity={0}
         color="#D4AF37"
       />
-      <Environment preset="studio" environmentIntensity={0.3} />
+      {/* Ambiente procedural (sem fetch externo de HDRI — só luzes geradas em runtime) */}
+      <Environment resolution={128} environmentIntensity={0.3}>
+        <Lightformer
+          intensity={2.5}
+          color="#F6D777"
+          position={[0, 3, -3]}
+          scale={[6, 3, 1]}
+        />
+        <Lightformer
+          intensity={0.8}
+          color="#D4AF37"
+          position={[-3, 1, 2]}
+          scale={[3, 2, 1]}
+        />
+        <Lightformer
+          intensity={0.5}
+          color="#F4F1E8"
+          position={[3, -1, 2]}
+          scale={[3, 2, 1]}
+        />
+      </Environment>
     </>
   );
 }

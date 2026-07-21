@@ -13,6 +13,12 @@ const NAV_ITEMS = [
   { href: "/perfil", label: "Perfil" },
 ] as const;
 
+/**
+ * Menu do Lobby: só tipografia. Nunca uma caixa, nunca um fundo.
+ * O único sinal — em repouso ou em hover — é uma linha dourada fina
+ * que aparece devagar sob o item. O texto em si nunca muda de cor:
+ * o dourado marca a atenção, não decora a palavra.
+ */
 export function LobbyNav() {
   const pathname = usePathname();
 
@@ -34,16 +40,13 @@ export function LobbyNav() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={cn(
-                      "group relative inline-block pb-2 text-[0.65rem] uppercase tracking-wide2 focus-visible:outline-none",
-                      active ? "text-gold" : "text-ivory-dim"
-                    )}
+                    className="group relative inline-block pb-2 text-[0.65rem] uppercase tracking-wide2 text-ivory-dim focus-visible:outline-none"
                   >
                     {item.label}
                     <span
                       aria-hidden="true"
                       className={cn(
-                        "pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-gold transition-transform duration-500 ease-crown",
+                        "pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-gold transition-transform duration-700 ease-crown",
                         active
                           ? "scale-x-100"
                           : "scale-x-0 group-hover:scale-x-100"
